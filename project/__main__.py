@@ -3,11 +3,21 @@ from fastapi import FastAPI
 from typing import List
 # from data.crud import *
 from project.data.crud import *
+from fastapi.middleware.cors import CORSMiddleware  # Importação do middleware de CORS
 
 app = FastAPI(
     title="Apple Fruit 🍎",
     description="Esta API permite criar, ler, atualizar e deletar frutas.",
     version="1.0.0"
+)
+
+# Middleware de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir requisições de todas as origens
+    allow_credentials=True,  # Permitir envio de cookies/autenticação
+    allow_methods=["*"],  # Permitir todos os métodos (GET, POST, etc.)
+    allow_headers=["*"],  # Permitir todos os cabeçalhos
 )
 
 from fastapi.responses import HTMLResponse
